@@ -13,7 +13,6 @@ A simple Expense Tracker API built with Node.js and Express. This application al
 
 - Node.js
 - Express
-- SQLite (or node-persist for simple file-based storage)
 - CORS for handling cross-origin requests
 - Body-parser for parsing JSON request bodies
 - Node-cron for scheduling tasks
@@ -25,16 +24,82 @@ A simple Expense Tracker API built with Node.js and Express. This application al
    git clone https://github.com/yourusername/expense-tracker.git
    cd expense-tracker
 
-  2. install required dependencies
+2. install required dependencies
      ```bash
      npm install
+The npm install command reads the package.json file in your project directory and installs all listed dependencies into the node_modules folder. This step is crucial for ensuring that all required libraries and frameworks are available for your application to function correctly.
 
-    3. **Run the application:**
+3. **Run the application:**
 
    Start the server using the following command:
 
    ```bash
    node server.js
+The server will run on http://localhost:3000
+
+API Endpoints
+1. Add Expense
+POST /expenses This endpoint allows you to add a new expense.
+
+Request Body:
+
+         json
+         {
+           "category": "Transportation",
+           "amount": 20,
+           "date": "2024-12-03"
+         }
+
+Response:
+
+      json
+      {
+        "status": "success",
+        "data": {
+          "id": 1,
+          "category": "Transportation",
+          "amount": 20,
+          "date": "2024-12-03"
+        }
+      }
+
+2. Get Expenses
+   
+GET /expenses This endpoint retrieves all logged expenses with optional filtering.
+
+Response:
+
+      json
+      {
+        "status": "success",
+        "data": [
+            {
+            "id": 1,
+            "category": "Transportation",
+            "amount": 20,
+            "date": "2024-12-03"
+          },
+          ...
+        ]
+      }
+
+3. Analyze Spending
+
+GET /expenses/analysis This endpoint analyzes spending by category and returns totals. 
+
+Response:
+
+         json
+         {
+           "status": "success",
+           "data": {
+             "Transportation": totalAmount1,
+             "Groceries": totalAmount2,
+             ...
+           }
+         }
+
+
 ## Troubleshooting
 
 If you encounter any issues while setting up or running, consider the following troubleshooting tips:
